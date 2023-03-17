@@ -3,15 +3,10 @@ const logger = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const PORT = 3000;
 
 dotenv.config();
 mongoose.Promise = global.Promise;
-
-mongoose.connect(process.env.DB_HOST, {
-  useNewUrlParser: true,
-  // useCreateIndex: true,
-  useUnifiedTopology: true,
-});
 
 const contactsRouter = require("./routes/api/contacts");
 
@@ -32,5 +27,21 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });
 });
+
+const connection = mongoose.connect(process.env.DB_HOST, {
+  useNewUrlParser: true,
+  // useCreateIndex: true,
+  useUnifiedTopology: true,
+});
+
+connection
+  .then(() => {
+    app.listen(PORT, function () {
+      console.log(`Server running. Use our API on port: ${PORT}`);
+    });
+  })
+  .catch((err) =>
+    console.log(`Server not running. Error message: ${err.message}`)
+  );
 
 module.exports = app;
