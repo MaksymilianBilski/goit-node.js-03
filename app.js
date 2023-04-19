@@ -5,10 +5,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-const Cat = mongoose.model("contacts", { name: String });
-
-const kitty = new Cat({ name: "Zildjian" });
-kitty.save().then(() => console.log("meow"));
+db.stats();
 
 const indexRouter = require("./routes/index");
 const contactsRouter = require("./routes/contacts");
