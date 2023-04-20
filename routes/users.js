@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { createUser, findById } = require("../controllers/index");
 
-/* GET users listing. */
 router.post("/", async (req, res, next) => {
   try {
     await createUser(req);
@@ -12,8 +11,9 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/", async (req, res, next) => {
-  const { id } = req.body;
+router.get("/:id", async (req, res, next) => {
+  const { id } = req.params.id;
+  console.log(req.params.id);
   try {
     const user = await findById(id);
     return res
