@@ -4,12 +4,9 @@
  * Module dependencies.
  */
 
-const app = require("../app");
+const app = require("./app");
 const debug = require("debug")("goit-node.js-03:server");
 const http = require("http");
-const mongoose = require("mongoose");
-require("dotenv").config();
-mongoose.connect(process.env.DATABASE_API);
 
 /**
  * Get port from environment and store in Express.
@@ -89,3 +86,4 @@ function onListening() {
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
 }
+
